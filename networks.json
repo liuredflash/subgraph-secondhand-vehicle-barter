@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "SecondHandVehicleMarketplace": {
+      "address": "0xcc8934c1a128e1a3e7059282a1a2744093d00892",
+      "startBlock": 3982092
+    }
+  }
+}

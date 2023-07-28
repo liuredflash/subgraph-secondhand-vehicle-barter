@@ -1,0 +1,67 @@
+type ActiveVehicle @entity {
+  id: ID!
+  nftAddress: Bytes! # address
+  sellerAddress: Bytes! # address
+  buyerAddress: Bytes # address
+  sellerTokenId: BigInt! # uint256
+  buyerTokenId: BigInt # uint256
+  isPosting: Boolean!
+  isBiding: Boolean!
+  isBartered: Boolean!
+}
+
+type VehicleBartered @entity(immutable: true) {
+  id: Bytes!
+  nftAddress: Bytes! # address
+  sellerAddress: Bytes! # address
+  buyerAddress: Bytes! # address
+  sellerTokenId: BigInt! # uint256
+  buyerTokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type VehicleBid @entity(immutable: true) {
+  id: Bytes!
+  nftAddress: Bytes! # address
+  sellerAddress: Bytes! # address
+  buyerAddress: Bytes! # address
+  sellerTokenId: BigInt! # uint256
+  buyerTokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type VehicleBidCancelled @entity(immutable: true) {
+  id: Bytes!
+  nftAddress: Bytes! # address
+  sellerAddress: Bytes! # address
+  buyerAddress: Bytes! # address
+  sellerTokenId: BigInt! # uint256
+  buyerTokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type VehicleCancelled @entity(immutable: true) {
+  id: Bytes!
+  nftAddress: Bytes! # address
+  sellerAddress: Bytes! # address
+  sellerTokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type VehiclePosted @entity(immutable: true) {
+  id: Bytes!
+  nftAddress: Bytes! # address
+  sellerAddress: Bytes! # address
+  sellerTokenId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
