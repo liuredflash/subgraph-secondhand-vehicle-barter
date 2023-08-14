@@ -22,14 +22,37 @@ export function handleVehicleBartered(event: VehicleBarteredEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
 
-  let activeItem = ActiveVehicle.load(
+  let activeItemSeller = ActiveVehicle.load(
     getIdFromEventParams(event.params.sellerTokenId, event.params.sellerAddress)
   )
 
-  if (!activeItem) {
-    activeItem = new ActiveVehicle(
-      getIdFromEventParams(event.params.sellerTokenId, event.params.sellerAddress)
-    )
+  let activeItemBuyer = ActiveVehicle.load(
+    getIdFromEventParams(event.params.buyerTokenId, event.params.buyerAddress)
+  )
+  if (activeItemSeller) {
+    activeItemSeller.nftAddress = event.params.nftAddress
+    activeItemSeller.sellerAddress = event.params.sellerAddress
+    activeItemSeller.sellerTokenId = event.params.sellerTokenId
+    activeItemSeller.buyerAddress = event.params.buyerAddress
+    activeItemSeller.buyerTokenId = event.params.buyerTokenId
+    activeItemSeller.isPosting = false
+    activeItemSeller.isBiding = false
+    activeItemSeller.isBartered = true
+
+    activeItemSeller.save()
+  }
+
+  if (activeItemBuyer) {
+    activeItemBuyer.nftAddress = event.params.nftAddress
+    activeItemBuyer.sellerAddress = event.params.buyerAddress
+    activeItemBuyer.sellerTokenId = event.params.buyerTokenId
+    activeItemBuyer.buyerAddress = event.params.sellerAddress
+    activeItemBuyer.buyerTokenId = event.params.sellerTokenId
+    activeItemBuyer.isPosting = false
+    activeItemBuyer.isBiding = false
+    activeItemBuyer.isBartered = true
+
+    activeItemBuyer.save()
   }
 
   entity.nftAddress = event.params.nftAddress
@@ -42,16 +65,6 @@ export function handleVehicleBartered(event: VehicleBarteredEvent): void {
   entity.blockTimestamp = event.block.timestamp
   entity.transactionHash = event.transaction.hash
 
-  activeItem.nftAddress = event.params.nftAddress
-  activeItem.sellerAddress = event.params.sellerAddress
-  activeItem.sellerTokenId = event.params.sellerTokenId
-  activeItem.buyerAddress = event.params.buyerAddress
-  activeItem.buyerTokenId = event.params.buyerTokenId
-  activeItem.isPosting = false
-  activeItem.isBiding = false
-  activeItem.isBartered = true
-
-  activeItem.save()
 
   entity.save()
 }

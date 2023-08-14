@@ -6,9 +6,9 @@ dataSources:
     name: SecondHandVehicleMarketplace
     network: sepolia
     source:
-      address: "0xcc8934c1a128e1a3e7059282a1a2744093d00892"
       abi: SecondHandVehicleMarketplace
-      startBlock: 3982092
+      address: "0x764eB92de3f3B81aCCEFAa00dFA6b02c6fb9733b"
+      startBlock: 4081301
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -23,11 +23,14 @@ dataSources:
         - name: SecondHandVehicleMarketplace
           file: ./abis/SecondHandVehicleMarketplace.json
       eventHandlers:
-        - event: VehicleBartered(indexed address,indexed address,indexed address,uint256,uint256)
+        - event: VehicleBartered(indexed address,indexed address,indexed
+            address,uint256,uint256)
           handler: handleVehicleBartered
-        - event: VehicleBid(indexed address,indexed address,indexed address,uint256,uint256)
+        - event: VehicleBid(indexed address,indexed address,indexed
+            address,uint256,uint256)
           handler: handleVehicleBid
-        - event: VehicleBidCancelled(indexed address,indexed address,indexed address,uint256,uint256)
+        - event: VehicleBidCancelled(indexed address,indexed address,indexed
+            address,uint256,uint256)
           handler: handleVehicleBidCancelled
         - event: VehicleCancelled(indexed address,indexed address,indexed uint256)
           handler: handleVehicleCancelled
